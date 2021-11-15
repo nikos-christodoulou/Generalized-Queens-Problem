@@ -11,11 +11,11 @@ public class Chromosome implements Comparable<Chromosome>
     //Constructs a randomly created chromosome
     Chromosome()
     {
-        this.genes = new int[8];
+        this.genes = new int[getQueens_number()];
         Random r = new Random();
         for(int i = 0; i < this.genes.length; i++)
         {
-            this.genes[i] = r.nextInt(8);
+            this.genes[i] = r.nextInt(getQueens_number());
         }
         this.calculateFitness();
     }
@@ -23,7 +23,7 @@ public class Chromosome implements Comparable<Chromosome>
     //Constructs a copy of a chromosome
     Chromosome(int[] genes)
     {
-        this.genes = new int[8];
+        this.genes = new int[getQueens_number()];
         for(int i = 0; i < this.genes.length; i++)
         {
             this.genes[i] = genes[i];
@@ -54,7 +54,7 @@ public class Chromosome implements Comparable<Chromosome>
     void mutate()
     {
         Random r = new Random();
-        this.genes[r.nextInt(8)] = r.nextInt(8);
+        this.genes[r.nextInt(getQueens_number())] = r.nextInt(getQueens_number());
         this.calculateFitness();
     }
 
@@ -72,6 +72,14 @@ public class Chromosome implements Comparable<Chromosome>
 
     public void setFitness(int fitness) {
         this.fitness = fitness;
+    }
+
+    public void setQueens_number(int queens_number){
+        this.queens_number = queens_number;
+    }
+
+    public int getQueens_number(){
+        return this.queens_number;
     }
 
     void print()

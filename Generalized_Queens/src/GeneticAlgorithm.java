@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class GeneticAlgorithm
+public class GeneticAlgorithm extends Chromosome
 {
     private ArrayList<Chromosome> population; // population with chromosomes
     private ArrayList<Integer> occurrences; // list with chromosomes (indices) based on fitness score
     //public int queens_number;   //this is the number used to the GeneticAlgorithm constructor
 
     /*
-    GenericAlgorithm(int queens_number){
+    GeneticAlgorithm(int queens_number){
         this.population = null;
         this.occurrences = null;
         this.queens_number = queens_number;
@@ -17,10 +17,11 @@ public class GeneticAlgorithm
 
      */
 
-    GeneticAlgorithm()
+    GeneticAlgorithm(int queens_number)
     {
         this.population = null;
         this.occurrences = null;
+        setQueens_number(queens_number);
     }
 
 
@@ -106,9 +107,9 @@ public class GeneticAlgorithm
         Random r = new Random();
 
         //Randomly choose the intersection point
-        int intersectionPoint = r.nextInt(8);
-        int[] firstChild = new int[8];
-        int[] secondChild = new int[8];
+        int intersectionPoint = r.nextInt(getQueens_number());
+        int[] firstChild = new int[getQueens_number()];
+        int[] secondChild = new int[getQueens_number()];
 
         //The first child has the left side of the x chromosome up to the intersection point...
         //The second child has the left side of the y chromosome up to the intersection point...
