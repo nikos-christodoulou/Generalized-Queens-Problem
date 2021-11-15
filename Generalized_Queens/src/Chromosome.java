@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Random;
 
 public class Chromosome implements Comparable<Chromosome>
@@ -8,22 +9,29 @@ public class Chromosome implements Comparable<Chromosome>
     //Integer that holds the fitness score of the chromosome
     private int fitness;
 
+    Chromosome(){
+
+    }
+
     //Constructs a randomly created chromosome
-    Chromosome()
+    Chromosome(int queens_number)
     {
-        this.genes = new int[getQueens_number()];
+        this.genes = new int[queens_number];
         Random r = new Random();
         for(int i = 0; i < this.genes.length; i++)
         {
-            this.genes[i] = r.nextInt(getQueens_number());
+            this.genes[i] = r.nextInt(queens_number);
         }
         this.calculateFitness();
     }
 
     //Constructs a copy of a chromosome
-    Chromosome(int[] genes)
+    Chromosome(int[] genes, int queens_number)
     {
-        this.genes = new int[getQueens_number()];
+        if (queens_number == 0){
+            System.out.println("Γαμηθηκε");
+        }
+        this.genes = new int[queens_number];
         for(int i = 0; i < this.genes.length; i++)
         {
             this.genes[i] = genes[i];
@@ -51,10 +59,10 @@ public class Chromosome implements Comparable<Chromosome>
     }
 
     //Mutate by randomly changing the position of a queen
-    void mutate()
+    void mutate(int queens_number)
     {
         Random r = new Random();
-        this.genes[r.nextInt(getQueens_number())] = r.nextInt(getQueens_number());
+        this.genes[r.nextInt(queens_number)] = r.nextInt(queens_number);
         this.calculateFitness();
     }
 

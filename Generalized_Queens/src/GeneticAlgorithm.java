@@ -6,16 +6,9 @@ public class GeneticAlgorithm extends Chromosome
 {
     private ArrayList<Chromosome> population; // population with chromosomes
     private ArrayList<Integer> occurrences; // list with chromosomes (indices) based on fitness score
-    //public int queens_number;   //this is the number used to the GeneticAlgorithm constructor
 
-    /*
-    GeneticAlgorithm(int queens_number){
-        this.population = null;
-        this.occurrences = null;
-        this.queens_number = queens_number;
-    }
 
-     */
+
 
     GeneticAlgorithm(int queens_number)
     {
@@ -26,10 +19,11 @@ public class GeneticAlgorithm extends Chromosome
 
 
 
-    Chromosome run(int populationSize, double mutationProbability, int maxSteps, int minFitness)
+    Chromosome run(int queens_number, int populationSize, double mutationProbability, int maxSteps, int minFitness)
     {
+        setQueens_number(this.queens_number);
         //We initialize the population
-        this.initializePopulation(populationSize);
+        this.initializePopulation(populationSize, queens_number);
         Random r = new Random();
         for(int step = 0; step < maxSteps; step++)
         {
@@ -50,13 +44,14 @@ public class GeneticAlgorithm extends Chromosome
 
                 Chromosome yParent = this.population.get(yIndex);
                 //We generate the children of the two chromosomes
-                Chromosome[] children = this.reproduce(xParent, yParent);
+
+                Chromosome[] children = this.reproduce(xParent, yParent, queens_number);
 
                 //We might then mutate the children
                 if(r.nextDouble() < mutationProbability)
                 {
-                    children[0].mutate();
-                    children[1].mutate();
+                    children[0].mutate(queens_number);
+                    children[1].mutate(queens_number);
                 }
                 //...and finally add them to the new population
                 newPopulation.add(children[0]);
@@ -75,12 +70,12 @@ public class GeneticAlgorithm extends Chromosome
     }
 
     //We initialize the population by creating random chromosomes
-    void initializePopulation(int populationSize)
+    void initializePopulation(int populationSize, int queens_number)
     {
         this.population = new ArrayList<>();
         for(int i = 0; i < populationSize; i++)
         {
-            this.population.add(new Chromosome());
+            this.population.add(new Chromosome(queens_number));
         }
         this.updateOccurrences();
     }
@@ -102,15 +97,14 @@ public class GeneticAlgorithm extends Chromosome
     }
 
     //Reproduces two chromosomes and generates their children
-    Chromosome[] reproduce(Chromosome x, Chromosome y)
+    Chromosome[] reproduce(Chromosome x, Chromosome y, int n)
     {
+        n = getQueens_number();
         Random r = new Random();
-
         //Randomly choose the intersection point
-        int intersectionPoint = r.nextInt(getQueens_number());
-        int[] firstChild = new int[getQueens_number()];
-        int[] secondChild = new int[getQueens_number()];
-
+        int intersectionPoint = r.nextInt(n);
+        int[] firstChild = new int[n];
+        int[] secondChild = new int[n];
         //The first child has the left side of the x chromosome up to the intersection point...
         //The second child has the left side of the y chromosome up to the intersection point...
         for(int i = 0; i < intersectionPoint; i++)
@@ -125,7 +119,7 @@ public class GeneticAlgorithm extends Chromosome
             firstChild[i] = y.getGenes()[i];
             secondChild[i] = x.getGenes()[i];
         }
-        return new Chromosome[] {new Chromosome(firstChild), new Chromosome(secondChild)};
+        return new Chromosome[] {new Chromosome(firstChild,n), new Chromosome(secondChild,n)};
     }
 }
 
