@@ -9,6 +9,7 @@ public class GeneticAlgorithm
 
 
 
+
     GeneticAlgorithm(int queens_number)
     {
         Chromosome.setQueens_number(queens_number);
