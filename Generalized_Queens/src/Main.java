@@ -13,9 +13,9 @@ public class Main
     {
         long start = System.currentTimeMillis();
         //each time we change the GenereticAlgorithm's constructor input, as well as the first parameter of the Chromosome run function.
-        GeneticAlgorithm algorithm = new GeneticAlgorithm(10);
+        GeneticAlgorithm algorithm = new GeneticAlgorithm(13);
         //populationSize, mutationProbability, maximumSteps, minimumFitness
-        Chromosome solution = algorithm.run(1000, 0.08, 100, calculateminFitness(Chromosome.getQueens_number()));
+        Chromosome solution = algorithm.run(1000, 0.08, 100000, calculateminFitness(Chromosome.getQueens_number()));
         long end = System.currentTimeMillis();
         //TODO: Show the time needed for calculating the solution.
         solution.print();
