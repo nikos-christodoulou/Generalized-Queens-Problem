@@ -118,6 +118,15 @@ public class Chromosome implements Comparable<Chromosome>
     @Override
     public int compareTo(Chromosome x)
     {
-        return this.fitness - x.fitness;
+        if(this.fitness > x.fitness){
+            return 1;
+        }
+        else if(this.fitness == x.fitness){
+            return 0;
+        }
+        else{
+            return -1;
+        }
+
     }
 }

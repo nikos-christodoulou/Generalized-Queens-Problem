@@ -26,8 +26,7 @@ public class GeneticAlgorithm
         {
             //Initialize the new generated population
             ArrayList<Chromosome> newPopulation = new ArrayList<>();
-            System.out.println(step);
-            for(int i = 0; i < populationSize / 2; i++)
+            for(int i = 0; i < populationSize / 2; i++)//why /2
             {
                 //We choose two chromosomes from the population
                 //Due to how fitnessBounds ArrayList is generated, the probability of

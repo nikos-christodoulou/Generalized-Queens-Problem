@@ -12,7 +12,7 @@ public class Main
     public static void main(String[] args)
     {
         //each time we change the GenereticAlgorithm's constructor input, as well as the first parameter of the Chromosome run function.
-        GeneticAlgorithm algorithm = new GeneticAlgorithm(3);
+        GeneticAlgorithm algorithm = new GeneticAlgorithm(7);
         System.out.println(Chromosome.getQueens_number());
         //populationSize, mutationProbability, maximumSteps, minimumFitness
         Chromosome solution = algorithm.run(1000, 0.08, 20000, calculateminFitness(Chromosome.getQueens_number()));
