@@ -86,32 +86,39 @@ public class Chromosome implements Comparable<Chromosome>
 
     void print()
     {
-        System.out.print("Chromosome : |");
-        for(int i = 0; i < this.genes.length; i++)
-        {
-            System.out.print(this.genes[i]);
-            System.out.print("|");
-        }
-        System.out.print(", Fitness : ");
-        System.out.println(this.fitness);
-
-        System.out.println("------------------------------------");
-        for(int i = 0; i < this.genes.length; i++)
-        {
-            for(int j=0; j < this.genes.length; j++)
-            {
-                if(this.genes[j] == i)
-                {
-                    System.out.print("|Q");
-                }
-                else
-                {
-                    System.out.print("| ");
+        boolean valid = true;
+        for(int j = 0;j<this.genes.length; j++) {
+            for (int i = j + 1; i < this.genes.length; i++) {
+                if (this.genes[j] == this.genes[i]) {
+                    valid = false;
                 }
             }
-            System.out.println("|");
         }
-        System.out.println("------------------------------------");
+        if(valid) {
+            System.out.print("Chromosome : |");
+            for (int i = 0; i < this.genes.length; i++) {
+                System.out.print(this.genes[i]);
+                System.out.print("|");
+            }
+            System.out.print(", Fitness : ");
+            System.out.println(this.fitness);
+
+            System.out.println("------------------------------------");
+            for (int i = 0; i < this.genes.length; i++) {
+                for (int j = 0; j < this.genes.length; j++) {
+                    if (this.genes[j] == i) {
+                        System.out.print("|Q");
+                    } else {
+                        System.out.print("| ");
+                    }
+                }
+                System.out.println("|");
+            }
+            System.out.println("------------------------------------");
+        }
+        else{
+            System.out.println("No solution found");
+        }
     }
 
     //compareTo function -> sorting can be done according to fitness scores

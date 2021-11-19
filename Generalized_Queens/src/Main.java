@@ -11,12 +11,14 @@ public class Main
     }
     public static void main(String[] args)
     {
+        long start = System.currentTimeMillis();
         //each time we change the GenereticAlgorithm's constructor input, as well as the first parameter of the Chromosome run function.
-        GeneticAlgorithm algorithm = new GeneticAlgorithm(7);
-        System.out.println(Chromosome.getQueens_number());
+        GeneticAlgorithm algorithm = new GeneticAlgorithm(10);
         //populationSize, mutationProbability, maximumSteps, minimumFitness
-        Chromosome solution = algorithm.run(1000, 0.08, 20000, calculateminFitness(Chromosome.getQueens_number()));
+        Chromosome solution = algorithm.run(1000, 0.08, 100, calculateminFitness(Chromosome.getQueens_number()));
+        long end = System.currentTimeMillis();
         //TODO: Show the time needed for calculating the solution.
         solution.print();
+        System.out.println("Search time:" + (double) (end-start)/1000 + "sec");//total time in seconds
     }
 }
