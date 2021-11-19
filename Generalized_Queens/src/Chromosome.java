@@ -5,16 +5,21 @@ public class Chromosome implements Comparable<Chromosome>
 {
     //Each position shows the vertical position of a queen in the corresponding column
     private int[] genes;
-    public int queens_number;   //this is the number used to the GeneticAlgorithm constructor
+    private static int queens_number;   //this is the number used to the GeneticAlgorithm constructor
     //Integer that holds the fitness score of the chromosome
     private int fitness;
 
-    Chromosome(){
-
+    public static int getQueens_number() {
+        return queens_number;
     }
 
-    //Constructs a randomly created chromosome
-    Chromosome(int queens_number)
+    public static void setQueens_number(int n) {
+        queens_number = n;
+    }
+
+
+    //Constructs a randomly created chromosome sequence
+    Chromosome()
     {
         this.genes = new int[queens_number];
         Random r = new Random();
@@ -26,11 +31,8 @@ public class Chromosome implements Comparable<Chromosome>
     }
 
     //Constructs a copy of a chromosome
-    Chromosome(int[] genes, int queens_number)
+    Chromosome(int[] genes)
     {
-        if (queens_number == 0){
-            System.out.println("Γαμηθηκε");
-        }
         this.genes = new int[queens_number];
         for(int i = 0; i < this.genes.length; i++)
         {
@@ -40,7 +42,7 @@ public class Chromosome implements Comparable<Chromosome>
     }
 
     //Calculates the fitness score of the chromosome as the number queen pairs that are NOT threatened
-    //The maximum number of queen pairs that are NOT threatened is (n-1) + (n-2) + ... + (n-n) = 7 + 6 + 5 + 4 + 3 + 2 + 1 = 28
+    //The maximum number of queen pairs that are NOT threatened is (n-1) + (n-2) + ... + (n-n)
     void calculateFitness()
     {
         int nonThreats = 0;
@@ -80,14 +82,6 @@ public class Chromosome implements Comparable<Chromosome>
 
     public void setFitness(int fitness) {
         this.fitness = fitness;
-    }
-
-    public void setQueens_number(int queens_number){
-        this.queens_number = queens_number;
-    }
-
-    public int getQueens_number(){
-        return this.queens_number;
     }
 
     void print()
