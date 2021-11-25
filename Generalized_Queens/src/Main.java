@@ -17,7 +17,6 @@ public class Main
         //populationSize, mutationProbability, maximumSteps, minimumFitness
         Chromosome solution = algorithm.run(1000, 0.08, 100000, calculateminFitness(Chromosome.getQueens_number()));
         long end = System.currentTimeMillis();
-        //TODO: Show the time needed for calculating the solution.
         solution.print();
         System.out.println("Search time:" + (double) (end-start)/1000 + "sec");//total time in seconds
     }
